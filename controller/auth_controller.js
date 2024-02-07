@@ -1,6 +1,7 @@
 const register = require('../model/startupSchema')
+const messages = require('../model/contactSchema')
 const home = async (req,res) => {
-    res.json({msg: "hello from ecell"});
+    res.end("hello from ecell");
 }
 const startUpController = async (req, res) => {
     try {
@@ -19,4 +20,16 @@ const startUpController = async (req, res) => {
         res.status(500).json({error})
     }
 }
-module.exports = { home , startUpController}
+const messageSend = async (req, res) => {
+    try {
+        const {name, email, message }= req.body;
+        const msgCreated = messages.create({ name, email, message });
+        if (msgCreated) {
+            res.status(201).json({ msgCreated });
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error})
+    }
+}
+module.exports = { home , startUpController, messageSend}
