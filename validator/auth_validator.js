@@ -15,9 +15,9 @@ const registrationSchema = z.object({
     .min(12, {message: "RegistraionN0 must be at lest of 14 chars. "})
     .max(20, {message: "RegistraionN0 must not be more than 20 characters"}),
     mobno: z
-    .number({message: "Mobile number is require"}),
+    .string({message: "Mobile number is require"}),
     team: z
-    .number({required_error: "Number of member is required"})
+    .string({required_error: "Number of member is required"})
     .max(20, {message: "Number of member must not be more than 20 characters"}),
     field: z
     .string({required_error: "field is required"}),

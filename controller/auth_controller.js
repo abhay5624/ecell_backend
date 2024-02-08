@@ -13,10 +13,13 @@ const startUpController = async (req, res) => {
         title,
         description,
         Requirements, phase } = req.body;
-        const startUpExist = register.findOne({ registrationNo });
-        const startupExit2 = register.findOne({email})
-        if (startUpExist || startupExit2) {
-            res.status(402).json({ msg: "startup from this registration number or email already exist" });
+        const startUpExist = await register.findOne({ registrationNo });
+        const startupExit2 = await register.findOne({email})
+        if (startUpExist) {
+            console.log(startUpExist);
+            res.status(402).json({ msg: " registration number already exist" });
+        } else if (startupExit2) {
+            res.status(402).json({ msg: " email already exist" });            
         } else {
             const startupCreated = register.create({name,email,registrationNo,mobno,team,field,title,description,Requirements, phase});
             res.status(201).json({ startupCreated });
