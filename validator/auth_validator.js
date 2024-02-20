@@ -12,10 +12,11 @@ const registrationSchema = z.object({
     .max(50, {message: "email must not be more than 50 characters"}),
     registrationNo: z
     .string({required_error: "RegistraionN0 is required"})
-    .min(13, {message: "RegistraionN0 must be at lest of 14 chars. "})
+    .min(6, {message: "RegistraionN0 must be at lest of 6 chars. "})
     .max(15, {message: "RegistraionN0 must not be more than 14 characters"}),
     mobno: z
-    .string({message: "Mobile number is require"}),
+        .string({ message: "Mobile number is require" })
+        .min(10, {message: "Mobile number must be at lest of 10 chars. "}),
     team: z
     .string({required_error: "Number of member is required"})
     .max(2, {message: "Number of member must not be more than 99"}),
@@ -32,7 +33,8 @@ const registrationSchema = z.object({
     Requirements: z
     .string({ required_error: "Requirements is required" }),
     phase: z
-    .string({ required_error: "Requirements is required" }),
+        .string({ required_error: "Requirements is required" }),
+    password: z.string({required_error: "password  is required"}),
 
 });
 module.exports = registrationSchema;
